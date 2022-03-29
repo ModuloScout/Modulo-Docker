@@ -14,6 +14,7 @@ PHP_BC = php bin/console
 # Build and run all containers
 start: stop
 	${COMPOSE} up -d --build
+	${DOCKER_EXEC_PHP} composer install
 
 .PHONY: php_sh
 # Run shell inside php-container
@@ -28,7 +29,7 @@ node_sh:
 .PHONY: stop
 # Stop and remove all containers
 stop:
-	${COMPOSE} down
+	${COMPOSE} down --remove-orphans
 
 .PHONY: debug
 # Print containers state and logs
