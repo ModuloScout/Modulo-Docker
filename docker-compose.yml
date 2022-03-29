@@ -1,0 +1,62 @@
+services:
+    nginx_service:
+        build:
+            context: .
+            dockerfile: nginx/Dockerfile
+        ports:
+            - 8000:80
+        depends_on:
+            - mariadb_service
+            - php_service
+        volumes_from:
+            - php_service
+        networks:
+            - modulo_scout_network
+
+    php_service:
+        build:
+            context: .
+            dockerfile: php/Dockerfile
+        volumes:
+            - "$PWD/php:/app"
+        networks:
+            - modulo_scout_network
+
+    mariadb_service:
+        image: mariadb:10.7
+        restart: always
+        environment:
+            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
+            MARIADB_DATABASE: modulo_scout
+        networks:
+            - modulo_scout_network
+
+    nodejs_service:
+        build:
+            context: .
+            dockerfile: node/Dockerfile
+        stdin_open: true
+        environment:
+            - "CI=true"
+        volumes:
+            - "$PWD/node:/app"
+        ports:
+            - 3000:3000
+        networks:
+            - modulo_scout_network
+
+    phpmyadmin_service:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mariadb_service
+        depends_on:
+            - mariadb_service
+        networks:
+            - modulo_scout_network
+
+networks:
+    modulo_scout_network:
+        driver: bridge
