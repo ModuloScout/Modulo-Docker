@@ -1,6 +1,6 @@
 [submodule "Modulo Back"]
     path = php
-    url = https://github.com/ModuloScout/Modulo-Back.git
+    url = git@github.com:ModuloScout/Modulo-Back.git
 [submodule "Modulo Front"]
     path = node
-    url = https://github.com/ModuloScout/Modulo-Front.git
+    url = git@github.com:ModuloScout/Modulo-Front.git
