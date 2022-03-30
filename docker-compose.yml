@@ -6,7 +6,7 @@ services:
         ports:
             - 8000:80
         depends_on:
-            - mariadb_service
+            - mysql_service
             - php_service
         volumes_from:
             - php_service
@@ -20,12 +20,12 @@ services:
             - "$PWD/php:/app"
         networks:
             - modulo_scout_network
-    mariadb_service:
-        image: mariadb:10.7
+    mysql_service:
+        image: mysql:8-debian
         restart: always
         environment:
-            MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 1
-            MARIADB_DATABASE: modulo_scout
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_DATABASE: modulo_scout
         networks:
             - modulo_scout_network
     nodejs_service:
@@ -47,9 +47,9 @@ services:
         ports:
             - 8080:80
         environment:
-            PMA_HOST: mariadb_service
+            PMA_HOST: mysql_service
         depends_on:
-            - mariadb_service
+            - mysql_service
         networks:
             - modulo_scout_network
 networks:

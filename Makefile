@@ -30,7 +30,9 @@ post_start_php:
 	${DOCKER_EXEC_PHP} composer install
 	${DOCKER_EXEC_PHP} npm install
 	${DOCKER_EXEC_PHP} npm run dev
-	${DOCKER_EXEC_PHP_BC} c:c
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-meta
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-query
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-result
 	${DOCKER_EXEC_PHP_BC} d:m:m
 	${DOCKER_EXEC_PHP_BC} d:f:l
 
