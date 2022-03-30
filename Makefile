@@ -2,8 +2,9 @@ COMPOSE = docker-compose
 
 DOCKER_EXEC = ${COMPOSE} exec
 DOCKER_EXEC_PHP = ${DOCKER_EXEC} ${CTNR_PHP}
-DOCKER_EXEC_NODE = ${DOCKER_EXEC} ${CTNR_NODE}
 DOCKER_EXEC_PHP_BC = ${DOCKER_EXEC_PHP} ${PHP_BC}
+DOCKER_EXEC_NODE = ${DOCKER_EXEC} ${CTNR_NODE}
+DOCKER_EXEC_NODE_NPM = ${DOCKER_EXEC} ${CTNR_NODE} npm
 
 CTNR_PHP = php_service
 CTNR_NODE = nodejs_service
@@ -23,6 +24,8 @@ post_start: post_start_php post_start_node
 .PHONY: post_start_node
 # Setup all deps in nodejs_service
 post_start_node:
+	${DOCKER_EXEC_NODE_NPM} install
+	${DOCKER_EXEC_NODE_NPM} run start
 
 .PHONY: post_start_php
 # Setup all deps in php_service

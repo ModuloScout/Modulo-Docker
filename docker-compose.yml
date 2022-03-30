@@ -18,6 +18,7 @@ services:
             dockerfile: php/Dockerfile
         volumes:
             - "$PWD/php:/app"
+        stdin_open: true
         networks:
             - modulo_scout_network
     mysql_service:
