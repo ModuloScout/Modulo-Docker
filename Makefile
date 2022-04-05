@@ -73,6 +73,7 @@ update: update_php update_node
 # Update dependencies in php-container
 update_php:
 	${DOCKER_EXEC_PHP_COMPOSER} update
+	${DOCKER_EXEC_PHP_NPM} update
 
 .PHONY: update_node
 # Update dependencies in node-container
