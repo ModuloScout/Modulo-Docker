@@ -79,3 +79,8 @@ update_php:
 # Update dependencies in node-container
 update_node:
 	${DOCKER_EXEC_NODE_NPM} update
+
+.PHONY: migration
+# Create migration in php-container
+migration:
+	${DOCKER_EXEC_PHP_BC} m:mi
