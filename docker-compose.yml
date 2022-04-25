@@ -4,7 +4,7 @@ services:
             context: .
             dockerfile: nginx/Dockerfile
         ports:
-            - 8000:80
+            - 8000:443
         depends_on:
             - mysql_service
             - php_service
