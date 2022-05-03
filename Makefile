@@ -83,8 +83,4 @@ update_node:
 .PHONY: migration
 # Create migration in php-container
 migration:
-	${DOCKER_EXEC_PHP_BC} d:d:d
-	${DOCKER_EXEC_PHP_BC} d:d:c
 	${DOCKER_EXEC_PHP_BC} m:mi
-	${DOCKER_EXEC_PHP_BC} d:m:m
-	${DOCKER_EXEC_PHP_BC} d:f:l
