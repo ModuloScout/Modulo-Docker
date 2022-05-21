@@ -41,8 +41,8 @@ post_start_php:
 	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-meta
 	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-query
 	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-result
-	${DOCKER_EXEC_PHP_BC} d:m:m
-	${DOCKER_EXEC_PHP_BC} d:f:l
+	${DOCKER_EXEC_PHP_BC} d:m:m -q
+	${DOCKER_EXEC_PHP_BC} d:f:l -q
 
 .PHONY: php_sh
 # Run shell inside php-container
