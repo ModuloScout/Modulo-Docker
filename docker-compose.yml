@@ -43,7 +43,7 @@ services:
         networks:
             - modulo_scout_network
     phpmyadmin_service:
-        image: phpmyadmin
+        image: phpmyadmin:latest
         restart: always
         ports:
             - 8080:80

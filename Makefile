@@ -38,11 +38,10 @@ post_start_php:
 	${DOCKER_EXEC_PHP_COMPOSER} install
 	${DOCKER_EXEC_PHP_NPM} install
 	${DOCKER_EXEC_PHP_NPM} run dev
-	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-meta
-	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-query
-	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-result
+	make cache
 	${DOCKER_EXEC_PHP_BC} d:m:m -q
 	${DOCKER_EXEC_PHP_BC} d:f:l -q
+	${DOCKER_EXEC_PHP_BC} a:u:c -qr ROLE_ADMIN admin@localhost.fr
 
 .PHONY: php_sh
 # Run shell inside php-container
@@ -84,3 +83,11 @@ update_node:
 # Create migration in php-container
 migration:
 	${DOCKER_EXEC_PHP_BC} m:mi
+
+.PHONY: cache
+# Clear cache in php-container
+cache:
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-meta
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-query
+	${DOCKER_EXEC_PHP_BC} doctrine:cache:clear-result
+	${DOCKER_EXEC_PHP_BC} c:c
