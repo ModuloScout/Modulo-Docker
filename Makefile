@@ -41,7 +41,6 @@ post_start_php:
 	make cache
 	${DOCKER_EXEC_PHP_BC} d:m:m -q
 	${DOCKER_EXEC_PHP_BC} d:f:l -q
-	${DOCKER_EXEC_PHP_BC} a:u:c -qr ROLE_ADMIN admin@localhost.fr
 
 .PHONY: php_sh
 # Run shell inside php-container
